@@ -9,8 +9,8 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 	return (
-		<Provider>
-			<NavigationContainer store={store}>
+		<Provider store={store}>
+			<NavigationContainer>
 				<Stack.Navigator>
 					<Stack.Screen name='Home' component={HomeScreen} />
 				</Stack.Navigator>
