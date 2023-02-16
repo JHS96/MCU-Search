@@ -1,12 +1,42 @@
-import { View, Text, Button } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 
-import { md5Hash } from '../util/http';
+import { useFetchRandomCharacterQuery } from '../features/characters/charactersApiSlice';
 
 function HomeScreen() {
+	const {
+		data,
+		isFetching,
+		isError,
+		isSuccess
+	} = useFetchRandomCharacterQuery();
+
+	if (isFetching) {
+		return (
+			<View>
+				<Text>Fetching...</Text>
+			</View>
+		);
+	}
+
+	if (isError) {
+		return (
+			<View>
+				<Text>Error...</Text>
+			</View>
+		);
+	}
+
+	if (isSuccess) {
+		return (
+			<ScrollView>
+				<Text>{JSON.stringify(data, null, 2)}</Text>
+			</ScrollView>
+		);
+	}
+
 	return (
 		<View>
 			<Text>I am a Home Screen</Text>
-			<Button title='md5 hash' onPress={() => console.log(md5Hash())} />
 		</View>
 	);
 }
