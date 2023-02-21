@@ -1,5 +1,6 @@
-import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 
+import Details from '../components/details/Details';
 import { useFetchRandomCharacterQuery } from '../features/characters/charactersApiSlice';
 
 function HomeScreen() {
@@ -23,15 +24,13 @@ function HomeScreen() {
 	}
 
 	if (isSuccess) {
-		const imgSource = data.data.results[0].thumbnail.path + '/detail.jpg';
-
 		return (
-			<ScrollView>
-				<View style={styles.imageContainer}>
-					<Image source={{ uri: imgSource }} style={styles.image} />
-				</View>
-				<Text>{JSON.stringify(data, null, 2)}</Text>
-			</ScrollView>
+			<Details
+				imageSource={data.data.results[0].thumbnail.path + '/detail.jpg'}
+				heading={data.data.results[0].name}
+				attributionText={data.attributionText}
+				attributionURL={'https://google.com'} // TODO: Replece this placeholder url with dynamic url
+			/>
 		);
 	}
 
@@ -43,13 +42,3 @@ function HomeScreen() {
 }
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-	imageContainer: {
-		height: 300
-	},
-	image: {
-		height: '100%',
-		resizeMode: 'center'
-	}
-});
