@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 
 import Details from '../components/details/Details';
 import { useFetchRandomCharacterQuery } from '../features/characters/charactersApiSlice';
+import { extractedAttributionURL } from '../util/utilityFunctions';
 
 function HomeScreen() {
 	const { data, isFetching, isError, isSuccess } =
@@ -24,12 +25,14 @@ function HomeScreen() {
 	}
 
 	if (isSuccess) {
+		const attrURL = extractedAttributionURL(data.attributionHTML);
+
 		return (
 			<Details
 				imageSource={data.data.results[0].thumbnail.path + '/detail.jpg'}
 				heading={data.data.results[0].name}
 				attributionText={data.attributionText}
-				attributionURL={'https://google.com'} // TODO: Replece this placeholder url with dynamic url
+				attributionURL={attrURL}
 			/>
 		);
 	}

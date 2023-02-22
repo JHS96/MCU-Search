@@ -9,3 +9,11 @@ export function md5Hash(timeStamp) {
 export function randomInteger(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+export function extractedAttributionURL(attributionString) {
+	// Below returns array with html string separated out so that url can be extracted
+	// The actual url will be the 2nd element in the array i.e index [1]
+	const splitAttrString = attributionString.split('"');
+	const extractedURL = splitAttrString[1];
+	return extractedURL;
+}
