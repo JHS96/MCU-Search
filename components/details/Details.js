@@ -8,23 +8,31 @@ import {
 	StyleSheet
 } from 'react-native';
 
+import Colors from '../../constants/colors';
+
 function Details({ imageSource, heading, attributionText, attributionURL }) {
 	return (
-		<ScrollView style={styles.rootContainer}>
-			<View style={styles.imageContainer}>
-				<Image source={{ uri: imageSource }} style={styles.image} />
+		<View style={styles.rootContainer}>
+			<ScrollView>
+				<View>
+					<View style={styles.imageContainer}>
+						<Image source={{ uri: imageSource }} style={styles.image} />
+					</View>
+					<View style={styles.headingContainer}>
+						<Text style={styles.headingText}>{heading}</Text>
+					</View>
+				</View>
+			</ScrollView>
+
+			<View style={styles.attributionContainer}>
+				<Pressable
+					onPress={() => Linking.openURL(attributionURL)}
+					android_ripple={{ color: Colors.primary600 }}
+				>
+					<Text style={styles.attributionText}>{attributionText}</Text>
+				</Pressable>
 			</View>
-			<View style={styles.headingContainer}>
-				<Text style={styles.headingText}>{heading}</Text>
-			</View>
-			<Pressable
-				style={styles.attributionContainer}
-				onPress={() => Linking.openURL(attributionURL)}
-				android_ripple={{ color: '#aaaaaa' }} // TODO: Improve color
-			>
-				<Text style={styles.attributionText}>{attributionText}</Text>
-			</Pressable>
-		</ScrollView>
+		</View>
 	);
 }
 
@@ -32,37 +40,38 @@ export default Details;
 
 const styles = StyleSheet.create({
 	rootContainer: {
-		backgroundColor: '#aaaeee' // TODO: Improve color - maybe ;)
+		flex: 1,
+		justifyContent: 'space-between',
+		backgroundColor: Colors.primary300
 	},
 	imageContainer: {
-		height: 300,
-		marginBottom: 8
+		height: 300
 	},
 	image: {
 		height: '100%',
 		resizeMode: 'cover'
 	},
 	headingContainer: {
+		backgroundColor: Colors.primary400,
 		paddingHorizontal: 8,
 		paddingVertical: 4
 	},
 	headingText: {
 		textAlign: 'center',
 		fontSize: 36,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		color: Colors.secondary800
 	},
 	attributionContainer: {
-		marginHorizontal: 8,
-		justifyContent: 'center',
-		alignContent: 'center',
-		alignSelf: 'center'
+		alignSelf: 'center',
+		borderRadius: 10,
+		overflow: 'hidden'
 	},
 	attributionText: {
 		paddingVertical: 8,
 		paddingHorizontal: 16,
 		textAlign: 'center',
 		fontSize: 12,
-		fontWeight: 'bold',
-		color: 'blue'
+		color: Colors.primary700
 	}
 });
