@@ -29,7 +29,9 @@ function HomeScreen() {
 
 		return (
 			<Details
-				imageSource={data.data.results[0].thumbnail.path + '/detail.jpg'}
+				imageSource={
+					data.data.results[0].thumbnail.path + '/landscape_xlarge.jpg'
+				}
 				heading={data.data.results[0].name}
 				attributionText={data.attributionText}
 				attributionURL={attrURL}

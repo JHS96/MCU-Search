@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
 	},
 	imageContainer: {
 		height: 300,
-		marginVertical: 8
+		marginBottom: 8
 	},
 	image: {
 		height: '100%',
-		resizeMode: 'center'
+		resizeMode: 'cover'
 	},
 	headingContainer: {
 		paddingHorizontal: 8,
