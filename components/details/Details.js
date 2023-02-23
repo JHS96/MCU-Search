@@ -10,7 +10,13 @@ import {
 
 import Colors from '../../constants/colors';
 
-function Details({ imageSource, heading, attributionText, attributionURL }) {
+function Details({
+	imageSource,
+	heading,
+	attributionText,
+	attributionURL,
+	children
+}) {
 	return (
 		<View style={styles.rootContainer}>
 			<ScrollView>
@@ -22,6 +28,8 @@ function Details({ imageSource, heading, attributionText, attributionURL }) {
 						<Text style={styles.headingText}>{heading}</Text>
 					</View>
 				</View>
+
+				<View style={styles.childrenContainer}>{children}</View>
 			</ScrollView>
 
 			<View style={styles.attributionContainer}>
@@ -44,6 +52,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		backgroundColor: Colors.primary300
 	},
+	childrenContainer: {
+		padding: 6
+	},
 	imageContainer: {
 		height: 300
 	},
@@ -59,7 +70,6 @@ const styles = StyleSheet.create({
 	headingText: {
 		textAlign: 'center',
 		fontSize: 36,
-		fontWeight: 'bold',
 		color: Colors.secondary800
 	},
 	attributionContainer: {

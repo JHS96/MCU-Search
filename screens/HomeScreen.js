@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native';
 
 import Details from '../components/details/Details';
+import CharacterDetails from '../components/details/CharacterDetails';
 import { useFetchRandomCharacterQuery } from '../features/characters/charactersApiSlice';
 import { extractedAttributionURL } from '../util/utilityFunctions';
 
@@ -35,15 +36,16 @@ function HomeScreen() {
 				heading={data.data.results[0].name}
 				attributionText={data.attributionText}
 				attributionURL={attrURL}
-			/>
+			>
+				<CharacterDetails
+					numComics={data.data.results[0].comics.available}
+					numSeries={data.data.results[0].series.available}
+					numStories={data.data.results[0].stories.available}
+					numEvents={data.data.results[0].events.available}
+				/>
+			</Details>
 		);
 	}
-
-	return (
-		<View>
-			<Text>I am a Home Screen</Text>
-		</View>
-	);
 }
 
 export default HomeScreen;
