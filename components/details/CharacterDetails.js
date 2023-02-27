@@ -1,22 +1,20 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-function CharacterDetails({ numComics, numSeries, numStories, numEvents }) {
+import DetailsListItem from './DetailsListItem';
+
+function CharacterDetails({ description, comics, series, stories, events }) {
 	return (
 		<View>
+			<Text style={styles.descriptionText}>
+				{description === '' ? 'No description available' : description}
+			</Text>
+
 			<Text style={styles.subHeading}>Featured In</Text>
 
-			<Text style={styles.label}>
-				Comics: <Text style={styles.count}>{numComics}</Text>
-			</Text>
-			<Text style={styles.label}>
-				Series: <Text style={styles.count}>{numSeries}</Text>
-			</Text>
-			<Text style={styles.label}>
-				Stories: <Text style={styles.count}>{numStories}</Text>
-			</Text>
-			<Text style={styles.label}>
-				Events: <Text style={styles.count}>{numEvents}</Text>
-			</Text>
+			<DetailsListItem text1='Comics:' text2={comics.available} />
+			<DetailsListItem text1='Series:' text2={series.available} />
+			<DetailsListItem text1='Stories:' text2={stories.available} />
+			<DetailsListItem text1='Events:' text2={events.available} />
 		</View>
 	);
 }
@@ -29,6 +27,9 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontStyle: 'italic',
 		textAlign: 'center'
+	},
+	descriptionText: {
+		fontSize: 16
 	},
 	label: {
 		fontSize: 20

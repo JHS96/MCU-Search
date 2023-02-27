@@ -38,10 +38,11 @@ function HomeScreen() {
 				attributionURL={attrURL}
 			>
 				<CharacterDetails
-					numComics={data.data.results[0].comics.available}
-					numSeries={data.data.results[0].series.available}
-					numStories={data.data.results[0].stories.available}
-					numEvents={data.data.results[0].events.available}
+					description={data.data.results[0].description}
+					comics={data.data.results[0].comics}
+					series={data.data.results[0].series}
+					stories={data.data.results[0].stories}
+					events={data.data.results[0].events}
 				/>
 			</Details>
 		);
