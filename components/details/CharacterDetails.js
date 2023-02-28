@@ -23,13 +23,15 @@ export default CharacterDetails;
 
 const styles = StyleSheet.create({
 	subHeading: {
-		fontSize: 24,
+		paddingVertical: 12,
+		fontSize: 28,
 		fontWeight: 'bold',
 		fontStyle: 'italic',
 		textAlign: 'center'
 	},
 	descriptionText: {
-		fontSize: 16
+		paddingVertical: 8,
+		fontSize: 18
 	},
 	label: {
 		fontSize: 20
