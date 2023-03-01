@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 
 import DetailsListItem from './DetailsListItem';
+import Colors from '../../constants/colors';
 
 function CharacterDetails({ description, comics, series, stories, events }) {
 	return (
@@ -11,10 +12,50 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 
 			<Text style={styles.subHeading}>Featured In</Text>
 
-			<DetailsListItem text1='Comics:' text2={comics.available} />
-			<DetailsListItem text1='Series:' text2={series.available} />
-			<DetailsListItem text1='Stories:' text2={stories.available} />
-			<DetailsListItem text1='Events:' text2={events.available} />
+			<DetailsListItem
+				text1='Comics:'
+				text2={comics.available}
+				extraStyles={{
+					text1: { fontFamily: 'roboto-regular' },
+					text2: {
+						fontFamily: 'roboto-bold-italic',
+						color: Colors.secondary800
+					}
+				}}
+			/>
+			<DetailsListItem
+				text1='Series:'
+				text2={series.available}
+				extraStyles={{
+					text1: { fontFamily: 'roboto-regular' },
+					text2: {
+						fontFamily: 'roboto-bold-italic',
+						color: Colors.secondary800
+					}
+				}}
+			/>
+			<DetailsListItem
+				text1='Stories:'
+				text2={stories.available}
+				extraStyles={{
+					text1: { fontFamily: 'roboto-regular' },
+					text2: {
+						fontFamily: 'roboto-bold-italic',
+						color: Colors.secondary800
+					}
+				}}
+			/>
+			<DetailsListItem
+				text1='Events:'
+				text2={events.available}
+				extraStyles={{
+					text1: { fontFamily: 'roboto-regular' },
+					text2: {
+						fontFamily: 'roboto-bold-italic',
+						color: Colors.secondary800
+					}
+				}}
+			/>
 		</View>
 	);
 }
@@ -25,19 +66,12 @@ const styles = StyleSheet.create({
 	subHeading: {
 		paddingVertical: 12,
 		fontSize: 28,
-		fontWeight: 'bold',
-		fontStyle: 'italic',
+		fontFamily: 'roboto-bold-italic',
 		textAlign: 'center'
 	},
 	descriptionText: {
 		paddingVertical: 8,
-		fontSize: 18
-	},
-	label: {
-		fontSize: 20
-	},
-	count: {
-		fontSize: 20,
-		fontWeight: 'bold'
+		fontSize: 18,
+		fontFamily: 'roboto-regular'
 	}
 });

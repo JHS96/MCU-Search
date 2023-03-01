@@ -32,14 +32,13 @@ function Details({
 				<View style={styles.childrenContainer}>{children}</View>
 			</ScrollView>
 
-			<View style={styles.attributionContainer}>
-				<Pressable
-					onPress={() => Linking.openURL(attributionURL)}
-					android_ripple={{ color: Colors.primary600 }}
-				>
-					<Text style={styles.attributionText}>{attributionText}</Text>
-				</Pressable>
-			</View>
+			<Pressable
+				style={styles.attributionContainer}
+				onPress={() => Linking.openURL(attributionURL)}
+				android_ripple={{ color: Colors.primary600 }}
+			>
+				<Text style={styles.attributionText}>{attributionText}</Text>
+			</Pressable>
 		</View>
 	);
 }
@@ -70,18 +69,19 @@ const styles = StyleSheet.create({
 	headingText: {
 		textAlign: 'center',
 		fontSize: 36,
+		fontFamily: 'roboto-bold-italic',
 		color: Colors.secondary800
 	},
 	attributionContainer: {
-		alignSelf: 'center',
-		borderRadius: 10,
-		overflow: 'hidden'
+		backgroundColor: Colors.primary400,
+		width: '100%'
 	},
 	attributionText: {
 		paddingVertical: 8,
 		paddingHorizontal: 16,
 		textAlign: 'center',
-		fontSize: 12,
-		color: Colors.primary700
+		fontSize: 14,
+		color: Colors.primary700,
+		fontFamily: 'roboto-bold-italic'
 	}
 });

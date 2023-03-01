@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
 		fontSize: 28
 	},
 	text2: {
-		fontSize: 28,
-		fontWeight: 'bold'
+		fontSize: 28
 	}
 });
