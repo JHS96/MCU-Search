@@ -1,7 +1,10 @@
 import { useCallback } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+
+import Button from '../components/ui/Button';
+import Colors from '../constants/colors';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,11 +31,62 @@ function HomeScreen({ navigation }) {
 	}
 
 	return (
-		<View onLayout={onLayoutRootView}>
-			<Text>Home Screen - Please improve me...</Text>
-			<Button title='Random Character' onPress={fetchRandomCharacterHandler} />
+		<View style={styles.rootContainer}>
+			<View style={styles.headingContainer}>
+				<Text style={styles.headingText}>
+					Home Screen - Please improve me...
+				</Text>
+			</View>
+			<View style={styles.bodyContainer} onLayout={onLayoutRootView}>
+				<View style={styles.btnContainer}>
+					<Button
+						onPress={fetchRandomCharacterHandler}
+						rippleColor={Colors.primary300}
+						containerStyle={{ width: 200, marginVertical: 6 }}
+						textStyle={{ fontSize: 24 }}
+					>
+						Random Character
+					</Button>
+
+					<Button
+						onPress={() => {}}
+						rippleColor={Colors.primary300}
+						containerStyle={{ width: 200, marginVertical: 6 }}
+						textStyle={{ fontSize: 24 }}
+						mode='flat'
+					>
+						Search
+					</Button>
+				</View>
+			</View>
 		</View>
 	);
 }
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+	rootContainer: {
+		flex: 1
+	},
+	headingContainer: {
+		backgroundColor: Colors.primary400,
+		paddingHorizontal: 8,
+		paddingVertical: 4
+	},
+	bodyContainer: {
+		justifyContent: 'space-around',
+		alignItems: 'center'
+	},
+	headingText: {
+		textAlign: 'center',
+		fontSize: 36,
+		fontFamily: 'roboto-bold-italic',
+		color: Colors.secondary800
+	},
+	btnContainer: {
+		marginTop: 12,
+		justifyContent: 'space-between',
+		alignItems: 'center'
+	}
+});
