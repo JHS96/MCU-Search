@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 	rootContainer: {
 		flex: 1,
 		justifyContent: 'space-between',
-		backgroundColor: Colors.primary300
+		backgroundColor: 'transparent'
 	},
 	childrenContainer: {
 		padding: 6

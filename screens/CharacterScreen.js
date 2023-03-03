@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { View, Text } from 'react-native';
 
+import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import Details from '../components/details/Details';
 import CharacterDetails from '../components/details/CharacterDetails';
 import { useFetchRandomCharacterQuery } from '../features/characters/charactersApiSlice';
@@ -52,22 +53,24 @@ function CharacterScreen({ route, navigation }) {
 		const attrURL = extractedAttributionURL(data.attributionHTML);
 
 		return (
-			<Details
-				imageSource={
-					data.data.results[0].thumbnail.path + '/landscape_xlarge.jpg'
-				}
-				heading={data.data.results[0].name}
-				attributionText={data.attributionText}
-				attributionURL={attrURL}
-			>
-				<CharacterDetails
-					description={data.data.results[0].description}
-					comics={data.data.results[0].comics}
-					series={data.data.results[0].series}
-					stories={data.data.results[0].stories}
-					events={data.data.results[0].events}
-				/>
-			</Details>
+			<ScreenTemplate headerPadding={true}>
+				<Details
+					imageSource={
+						data.data.results[0].thumbnail.path + '/landscape_xlarge.jpg'
+					}
+					heading={data.data.results[0].name}
+					attributionText={data.attributionText}
+					attributionURL={attrURL}
+				>
+					<CharacterDetails
+						description={data.data.results[0].description}
+						comics={data.data.results[0].comics}
+						series={data.data.results[0].series}
+						stories={data.data.results[0].stories}
+						events={data.data.results[0].events}
+					/>
+				</Details>
+			</ScreenTemplate>
 		);
 	}
 

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
+import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import Button from '../components/ui/Button';
 import Colors from '../constants/colors';
 import GlobalStyles from '../constants/globalStyles';
@@ -32,35 +33,37 @@ function HomeScreen({ navigation }) {
 	}
 
 	return (
-		<View style={styles.rootContainer}>
-			<View style={GlobalStyles.headingContainer}>
-				<Text style={GlobalStyles.headingText}>
-					Home Screen - Please improve me...
-				</Text>
-			</View>
-			<View style={styles.bodyContainer} onLayout={onLayoutRootView}>
-				<View style={styles.btnContainer}>
-					<Button
-						onPress={fetchRandomCharacterHandler}
-						rippleColor={Colors.primary300}
-						containerStyle={{ width: 200, marginVertical: 6 }}
-						textStyle={{ fontSize: 24 }}
-					>
-						Random Character
-					</Button>
+		<ScreenTemplate headerPadding={true}>
+			<View style={styles.rootContainer}>
+				<View style={GlobalStyles.headingContainer}>
+					<Text style={GlobalStyles.headingText}>
+						Home Screen - Please improve me...
+					</Text>
+				</View>
+				<View style={styles.bodyContainer} onLayout={onLayoutRootView}>
+					<View style={styles.btnContainer}>
+						<Button
+							onPress={fetchRandomCharacterHandler}
+							rippleColor={Colors.primary300}
+							containerStyle={{ width: 200, marginVertical: 6 }}
+							textStyle={{ fontSize: 24 }}
+						>
+							Random Character
+						</Button>
 
-					<Button
-						onPress={() => {}}
-						rippleColor={Colors.primary300}
-						containerStyle={{ width: 200, marginVertical: 6 }}
-						textStyle={{ fontSize: 24 }}
-						mode='flat'
-					>
-						Search
-					</Button>
+						<Button
+							onPress={() => {}}
+							rippleColor={Colors.primary300}
+							containerStyle={{ width: 200, marginVertical: 6 }}
+							textStyle={{ fontSize: 24 }}
+							mode='flat'
+						>
+							Search
+						</Button>
+					</View>
 				</View>
 			</View>
-		</View>
+		</ScreenTemplate>
 	);
 }
 
