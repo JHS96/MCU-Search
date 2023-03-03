@@ -5,6 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 
 import Button from '../components/ui/Button';
 import Colors from '../constants/colors';
+import GlobalStyles from '../constants/globalStyles';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,8 +33,8 @@ function HomeScreen({ navigation }) {
 
 	return (
 		<View style={styles.rootContainer}>
-			<View style={styles.headingContainer}>
-				<Text style={styles.headingText}>
+			<View style={GlobalStyles.headingContainer}>
+				<Text style={GlobalStyles.headingText}>
 					Home Screen - Please improve me...
 				</Text>
 			</View>
@@ -69,20 +70,9 @@ const styles = StyleSheet.create({
 	rootContainer: {
 		flex: 1
 	},
-	headingContainer: {
-		backgroundColor: Colors.primary400,
-		paddingHorizontal: 8,
-		paddingVertical: 4
-	},
 	bodyContainer: {
 		justifyContent: 'space-around',
 		alignItems: 'center'
-	},
-	headingText: {
-		textAlign: 'center',
-		fontSize: 36,
-		fontFamily: 'roboto-bold-italic',
-		color: Colors.secondary800
 	},
 	btnContainer: {
 		marginTop: 12,

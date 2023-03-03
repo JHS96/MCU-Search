@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import Colors from '../../constants/colors';
+import GlobalStyles from '../../constants/globalStyles';
 
 function Details({
 	imageSource,
@@ -24,8 +25,8 @@ function Details({
 					<View style={styles.imageContainer}>
 						<Image source={{ uri: imageSource }} style={styles.image} />
 					</View>
-					<View style={styles.headingContainer}>
-						<Text style={styles.headingText}>{heading}</Text>
+					<View style={GlobalStyles.headingContainer}>
+						<Text style={GlobalStyles.headingText}>{heading}</Text>
 					</View>
 				</View>
 
@@ -60,17 +61,6 @@ const styles = StyleSheet.create({
 	image: {
 		height: '100%',
 		resizeMode: 'cover'
-	},
-	headingContainer: {
-		backgroundColor: Colors.primary400,
-		paddingHorizontal: 8,
-		paddingVertical: 4
-	},
-	headingText: {
-		textAlign: 'center',
-		fontSize: 36,
-		fontFamily: 'roboto-bold-italic',
-		color: Colors.secondary800
 	},
 	attributionContainer: {
 		backgroundColor: Colors.primary400,
