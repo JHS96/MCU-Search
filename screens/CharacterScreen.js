@@ -5,6 +5,7 @@ import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import Details from '../components/details/Details';
 import CharacterDetails from '../components/details/CharacterDetails';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import ErrorDisplay from '../components/ErrorDisplay';
 import { useFetchRandomCharacterQuery } from '../features/characters/charactersApiSlice';
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
@@ -30,20 +31,18 @@ function CharacterScreen({ route, navigation }) {
 				title: 'Random Character'
 			});
 		}
-	}, []);
+
+		if (isError) {
+			navigation.setOptions({ title: 'Error' });
+		}
+	}, [navigation, isError]);
 
 	if (isFetching) {
 		return <LoadingSpinner size={64} color={Colors.secondary800} />;
 	}
 
-	// TODO - Implement ErrorScreen
 	if (isError) {
-		console.log('error!!!');
-		return (
-			<View>
-				<Text>Error...</Text>
-			</View>
-		);
+		return <ErrorDisplay />;
 	}
 
 	if (isSuccess) {

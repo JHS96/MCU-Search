@@ -8,7 +8,8 @@ const Colors = {
 	secondary700: '#7B6432',
 	secondary600: '#937A47',
 	seconadry500: '#AC915D',
-	black: '#000000'
+	black: '#000000',
+	danger: '#b32323'
 };
 
 export default Colors;

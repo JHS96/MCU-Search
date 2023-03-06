@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 12,
 		fontSize: 28,
 		fontFamily: 'roboto-bold-italic',
-		textAlign: 'center'
+		textAlign: 'center',
+		textDecorationLine: 'underline'
 	},
 	descriptionText: {
 		paddingVertical: 8,
