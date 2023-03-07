@@ -1,5 +1,7 @@
+import { useState, useCallback } from 'react';
 import {
 	ScrollView,
+	RefreshControl,
 	View,
 	Pressable,
 	Text,
@@ -16,11 +18,24 @@ function Details({
 	heading,
 	attributionText,
 	attributionURL,
+	refetch,
 	children
 }) {
+	const [isRefreshing, setIsRefreshing] = useState(false);
+
+	const onRefresh = useCallback(async () => {
+		setIsRefreshing(true);
+		await refetch();
+		setIsRefreshing(false);
+	}, []);
+
 	return (
 		<View style={styles.rootContainer}>
-			<ScrollView>
+			<ScrollView
+				refreshControl={
+					<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+				}
+			>
 				<View>
 					<View style={styles.imageContainer}>
 						<Image source={{ uri: imageSource }} style={styles.image} />

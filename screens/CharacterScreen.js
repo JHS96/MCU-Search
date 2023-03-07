@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
@@ -11,20 +11,20 @@ import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
 function CharacterScreen({ route, navigation }) {
+	// If route has a randomCharacter=true param, automatically fetch and display random character
 	let skip = true;
 
 	if (route.params?.randomCharacter) {
 		skip = false;
 	}
 
-	const { data, isFetching, isError, isSuccess } = useFetchRandomCharacterQuery(
-		null,
-		{
+	const { data, isFetching, isError, isSuccess, refetch } =
+		useFetchRandomCharacterQuery(null, {
 			skip: skip,
 			refetchOnMountOrArgChange: !skip
-		}
-	);
+		});
 
+	// If displaying random character, change header title to "Random Character"
 	useEffect(() => {
 		if (route.params?.randomCharacter) {
 			navigation.setOptions({
@@ -32,10 +32,15 @@ function CharacterScreen({ route, navigation }) {
 			});
 		}
 
+		// If there is an error, change header title to "Error"
 		if (isError) {
 			navigation.setOptions({ title: 'Error' });
 		}
 	}, [navigation, isError]);
+
+	const refetchRandomCharacterHandler = useCallback(() => {
+		refetch();
+	}, []);
 
 	if (isFetching) {
 		return <LoadingSpinner size={64} color={Colors.secondary800} />;
@@ -45,7 +50,7 @@ function CharacterScreen({ route, navigation }) {
 		return <ErrorDisplay />;
 	}
 
-	if (isSuccess) {
+	if (isSuccess && route.params?.randomCharacter) {
 		const attrURL = extractedAttributionURL(data.attributionHTML);
 
 		return (
@@ -57,6 +62,7 @@ function CharacterScreen({ route, navigation }) {
 					heading={data.data.results[0].name}
 					attributionText={data.attributionText}
 					attributionURL={attrURL}
+					refetch={refetchRandomCharacterHandler}
 				>
 					<CharacterDetails
 						description={data.data.results[0].description}
