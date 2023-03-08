@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { useState, useCallback } from 'react';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -11,6 +11,8 @@ import GlobalStyles from '../constants/globalStyles';
 SplashScreen.preventAutoHideAsync();
 
 function HomeScreen({ navigation }) {
+	const [enteredText, setEnteredText] = useState('');
+
 	const [fontsLoaded] = useFonts({
 		'roboto-bold': require('../assets/fonts/Roboto-Bold.ttf'),
 		'roboto-bold-italic': require('../assets/fonts/Roboto-BoldItalic.ttf'),
@@ -32,6 +34,10 @@ function HomeScreen({ navigation }) {
 		navigation.navigate('Character', { randomCharacter: true });
 	}
 
+	function searchCharacters() {
+		navigation.navigate('List', { searchParam: enteredText });
+	}
+
 	return (
 		<ScreenTemplate headerPadding={true}>
 			<View style={styles.rootContainer}>
@@ -51,8 +57,15 @@ function HomeScreen({ navigation }) {
 							Random Character
 						</Button>
 
+						<TextInput
+							style={styles.textInput}
+							onChangeText={setEnteredText}
+							value={enteredText}
+							placeholder='Type here...'
+						/>
+
 						<Button
-							onPress={() => {}}
+							onPress={searchCharacters}
 							rippleColor={Colors.primary300}
 							containerStyle={{ width: 200, marginVertical: 6 }}
 							textStyle={{ fontSize: 24 }}
@@ -81,5 +94,17 @@ const styles = StyleSheet.create({
 		marginTop: 12,
 		justifyContent: 'space-between',
 		alignItems: 'center'
+	},
+	textInput: {
+		height: 50,
+		minWidth: 250,
+		margin: 12,
+		backgroundColor: Colors.primary300,
+		borderWidth: 2,
+		borderColor: Colors.primary400,
+		borderRadius: 5,
+		fontSize: 20,
+		fontFamily: 'roboto-bold-italic',
+		textAlign: 'center'
 	}
 });

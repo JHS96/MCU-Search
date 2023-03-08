@@ -23,9 +23,17 @@ export const charactersApiSlice = createApi({
 						timeStamp
 					)}&limit=1&offset=${rndCharNum - 1}`; // Set offset to rndCharNum minus 1 as arrays are zero based
 				}
+			}),
+			searchCharacters: builder.query({
+				query(searchParam) {
+					return `/characters?ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5Hash(
+						timeStamp
+					)}&nameStartsWith=${searchParam}&limit=20`;
+				}
 			})
 		};
 	}
 });
 
-export const { useFetchRandomCharacterQuery } = charactersApiSlice;
+export const { useFetchRandomCharacterQuery, useSearchCharactersQuery } =
+	charactersApiSlice;
