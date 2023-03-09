@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
@@ -8,11 +9,13 @@ import { useSearchCharactersQuery } from '../features/characters/charactersApiSl
 import Colors from '../constants/colors';
 
 function ListScreen({ route }) {
-	const { data, isFetching, isError, isSuccess } = useSearchCharactersQuery(
-		route.params.searchParam
-	);
+	const [page, setPage] = useState(1);
+	const { data, isLoading, isError, isSuccess } = useSearchCharactersQuery({
+		page,
+		searchParam: route.params.searchParam
+	});
 
-	if (isFetching) {
+	if (isLoading) {
 		return <LoadingSpinner size={64} color={Colors.secondary800} />;
 	}
 
@@ -27,6 +30,12 @@ function ListScreen({ route }) {
 					data={data.data.results}
 					renderItem={({ item }) => <DetailsListItem text1={item.name} />}
 					keyExtractor={item => item.id}
+					onEndReachedThreshold={0.5}
+					onEndReached={() => {
+						if (data.data.results.length < data.data.total) {
+							setPage(prevPageNum => prevPageNum + 1);
+						}
+					}}
 				/>
 			</ScreenTemplate>
 		);
