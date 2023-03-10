@@ -35,6 +35,7 @@ function HomeScreen({ navigation }) {
 	}
 
 	function searchCharacters() {
+		setEnteredText('');
 		navigation.navigate('List', { searchParam: enteredText });
 	}
 

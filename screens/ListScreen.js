@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import DetailsListItem from '../components/details/DetailsListItem';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import ErrorDisplay from '../components/ErrorDisplay';
-import { useSearchCharactersQuery } from '../features/characters/charactersApiSlice';
+import {
+	useSearchCharactersQuery,
+	charactersApiSlice
+} from '../features/characters/charactersApiSlice';
 import Colors from '../constants/colors';
 
 function ListScreen({ route }) {
@@ -14,6 +18,13 @@ function ListScreen({ route }) {
 		page,
 		searchParam: route.params.searchParam
 	});
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => {
+			dispatch(charactersApiSlice.util.resetApiState());
+		};
+	}, []);
 
 	if (isLoading) {
 		return <LoadingSpinner size={64} color={Colors.secondary800} />;
