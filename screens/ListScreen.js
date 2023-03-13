@@ -39,7 +39,16 @@ function ListScreen({ route }) {
 			<ScreenTemplate headerPadding={true}>
 				<FlatList
 					data={data.data.results}
-					renderItem={({ item }) => <DetailsListItem text1={item.name} />}
+					renderItem={({ item }) => (
+						<DetailsListItem
+							text1={item.name}
+							thumbnailUrl={
+								item.thumbnail.path +
+								'/standard_medium.' +
+								item.thumbnail.extension
+							}
+						/>
+					)}
 					keyExtractor={item => item.id}
 					onEndReachedThreshold={0.5}
 					onEndReached={() => {
