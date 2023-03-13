@@ -12,7 +12,7 @@ import {
 } from '../features/characters/charactersApiSlice';
 import Colors from '../constants/colors';
 
-function ListScreen({ route }) {
+function ListScreen({ route, navigation }) {
 	const [page, setPage] = useState(1);
 	const { data, isLoading, isError, isSuccess } = useSearchCharactersQuery({
 		page,
@@ -41,6 +41,7 @@ function ListScreen({ route }) {
 					data={data.data.results}
 					renderItem={({ item }) => (
 						<DetailsListItem
+							onPress={() => navigation.navigate('Character', { id: item.id })}
 							text1={item.name}
 							thumbnailUrl={
 								item.thumbnail.path +

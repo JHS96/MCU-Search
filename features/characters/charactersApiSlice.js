@@ -45,9 +45,19 @@ export const charactersApiSlice = createApi({
 			forceRefetch({ currentArg, previousArg }) {
 				return currentArg !== previousArg;
 			}
+		}),
+		fetchCharacterById: build.query({
+			query: id => {
+				return `/characters/${id}?ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5Hash(
+					timeStamp
+				)}`;
+			}
 		})
 	})
 });
 
-export const { useFetchRandomCharacterQuery, useSearchCharactersQuery } =
-	charactersApiSlice;
+export const {
+	useFetchRandomCharacterQuery,
+	useSearchCharactersQuery,
+	useFetchCharacterByIdQuery
+} = charactersApiSlice;

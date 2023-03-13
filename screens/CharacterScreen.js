@@ -6,7 +6,10 @@ import Details from '../components/details/Details';
 import CharacterDetails from '../components/details/CharacterDetails';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import ErrorDisplay from '../components/ErrorDisplay';
-import { useFetchRandomCharacterQuery } from '../features/characters/charactersApiSlice';
+import {
+	useFetchRandomCharacterQuery,
+	useFetchCharacterByIdQuery
+} from '../features/characters/charactersApiSlice';
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
@@ -18,11 +21,14 @@ function CharacterScreen({ route, navigation }) {
 		skip = false;
 	}
 
-	const { data, isFetching, isError, isSuccess, refetch } =
-		useFetchRandomCharacterQuery(null, {
-			skip: skip,
-			refetchOnMountOrArgChange: !skip
-		});
+	const applicableHook = route.params?.randomCharacter
+		? useFetchRandomCharacterQuery(null, {
+				skip: skip,
+				refetchOnMountOrArgChange: !skip
+		  })
+		: useFetchCharacterByIdQuery(route.params.id);
+
+	const { data, isFetching, isError, isSuccess, refetch } = applicableHook;
 
 	// If displaying random character, change header title to "Random Character"
 	useEffect(() => {
@@ -50,7 +56,7 @@ function CharacterScreen({ route, navigation }) {
 		return <ErrorDisplay />;
 	}
 
-	if (isSuccess && route.params?.randomCharacter) {
+	if (isSuccess) {
 		const attrURL = extractedAttributionURL(data.attributionHTML);
 
 		return (
@@ -75,13 +81,6 @@ function CharacterScreen({ route, navigation }) {
 			</ScreenTemplate>
 		);
 	}
-
-	// TODO - Display details of character chosen by user
-	return (
-		<View>
-			<Text>Not Random</Text>
-		</View>
-	);
 }
 
 export default CharacterScreen;

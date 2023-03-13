@@ -2,9 +2,10 @@ import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 
 import Colors from '../../constants/colors';
 
-function DetailsListItem({ text1, text2, thumbnailUrl, extraStyles }) {
+function DetailsListItem({ text1, text2, thumbnailUrl, onPress, extraStyles }) {
 	return (
 		<Pressable
+			onPress={onPress}
 			android_ripple={{ color: Colors.primary600, foreground: true }}
 			style={[styles.container, extraStyles?.container]}
 		>
