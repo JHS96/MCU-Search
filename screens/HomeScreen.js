@@ -12,6 +12,7 @@ SplashScreen.preventAutoHideAsync();
 
 function HomeScreen({ navigation }) {
 	const [enteredText, setEnteredText] = useState('');
+	const [isValidInput, setIsValidInput] = useState(true);
 
 	const [fontsLoaded] = useFonts({
 		'roboto-bold': require('../assets/fonts/Roboto-Bold.ttf'),
@@ -34,8 +35,20 @@ function HomeScreen({ navigation }) {
 		navigation.navigate('Character', { randomCharacter: true });
 	}
 
+	function inputChangeHandler(e) {
+		setEnteredText(e);
+		if (e !== '') {
+			setIsValidInput(true);
+		} else {
+			setIsValidInput(false);
+		}
+	}
+
 	function searchCharacters() {
-		setEnteredText('');
+		if (!enteredText) {
+			setIsValidInput(false);
+			return;
+		}
 		navigation.navigate('List', { searchParam: enteredText });
 	}
 
@@ -59,15 +72,23 @@ function HomeScreen({ navigation }) {
 						</Button>
 
 						<TextInput
-							style={styles.textInput}
-							onChangeText={setEnteredText}
+							style={[
+								styles.textInput,
+								!isValidInput && styles.invalidTextInput
+							]}
+							onChangeText={inputChangeHandler}
 							value={enteredText}
 							placeholder='Type here...'
+							placeholderTextColor={!isValidInput && Colors.danger}
 						/>
+						{!isValidInput && (
+							<Text style={styles.invalidText}>Please enter valid text...</Text>
+						)}
 
 						<Button
 							onPress={searchCharacters}
 							rippleColor={Colors.primary300}
+							disabled={!enteredText || !isValidInput}
 							containerStyle={{ width: 200, marginVertical: 6 }}
 							textStyle={{ fontSize: 24 }}
 							mode='flat'
@@ -107,5 +128,14 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontFamily: 'roboto-bold-italic',
 		textAlign: 'center'
+	},
+	invalidTextInput: {
+		borderWidth: 2,
+		borderColor: Colors.danger
+	},
+	invalidText: {
+		marginTop: -8,
+		marginBottom: 8,
+		color: Colors.danger
 	}
 });

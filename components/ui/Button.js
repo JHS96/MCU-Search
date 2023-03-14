@@ -8,7 +8,8 @@ function Button({
 	mode,
 	containerStyle,
 	textStyle,
-	rippleColor
+	rippleColor,
+	disabled
 }) {
 	return (
 		<View
@@ -21,6 +22,7 @@ function Button({
 			<Pressable
 				android_ripple={{ color: rippleColor, foreground: true }}
 				onPress={onPress}
+				disabled={disabled}
 			>
 				<View style={[styles.innerContainer, mode === 'flat' && styles.flat]}>
 					<Text
