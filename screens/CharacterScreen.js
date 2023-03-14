@@ -63,7 +63,9 @@ function CharacterScreen({ route, navigation }) {
 			<ScreenTemplate headerPadding={true}>
 				<Details
 					imageSource={
-						data.data.results[0].thumbnail.path + '/landscape_xlarge.jpg'
+						data.data.results[0].thumbnail.path +
+						'/landscape_xlarge.' +
+						data.data.results[0].thumbnail.extension
 					}
 					heading={data.data.results[0].name}
 					attributionText={data.attributionText}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, View, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
@@ -37,6 +37,17 @@ function ListScreen({ route, navigation }) {
 	if (isSuccess) {
 		return (
 			<ScreenTemplate headerPadding={true}>
+				{!data.data.results.length && (
+					<View style={styles.noResultsTextContainer}>
+						<Text style={styles.noResultsText1}>
+							No results for your search term:{' '}
+							<Text style={styles.noResultsText2}>
+								{route.params.searchParam}
+							</Text>
+						</Text>
+					</View>
+				)}
+
 				<FlatList
 					data={data.data.results}
 					renderItem={({ item }) => (
@@ -70,5 +81,16 @@ export default ListScreen;
 const styles = StyleSheet.create({
 	listContainer: {
 		flex: 1
+	},
+	noResultsTextContainer: {
+		marginTop: 12
+	},
+	noResultsText1: {
+		textAlign: 'center',
+		fontSize: 24,
+		fontFamily: 'roboto-regular'
+	},
+	noResultsText2: {
+		fontFamily: 'roboto-bold-italic'
 	}
 });
