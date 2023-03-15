@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import DetailsListItem from '../components/details/DetailsListItem';
+import Attribution from '../components/Attribution';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import ErrorDisplay from '../components/ErrorDisplay';
 import {
 	useSearchCharactersQuery,
 	charactersApiSlice
 } from '../features/characters/charactersApiSlice';
+import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
 function ListScreen({ route, navigation }) {
@@ -35,6 +37,8 @@ function ListScreen({ route, navigation }) {
 	}
 
 	if (isSuccess) {
+		const attrUrl = extractedAttributionURL(data.attributionHTML);
+
 		return (
 			<ScreenTemplate headerPadding={true}>
 				{!data.data.results.length && (
@@ -69,12 +73,15 @@ function ListScreen({ route, navigation }) {
 						}
 					}}
 				/>
+
+				<Attribution
+					attributionText={data.attributionText}
+					attributionURL={attrUrl}
+				/>
 			</ScreenTemplate>
 		);
 	}
 }
-
-// TODO - Add attribution
 
 export default ListScreen;
 

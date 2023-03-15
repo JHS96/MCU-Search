@@ -43,7 +43,7 @@ function CharacterScreen({ route, navigation }) {
 		}
 	}, [navigation, isError]);
 
-	const refetchRandomCharacterHandler = useCallback(() => {
+	const refetchCharacterHandler = useCallback(() => {
 		refetch();
 	}, []);
 
@@ -69,7 +69,7 @@ function CharacterScreen({ route, navigation }) {
 					heading={data.data.results[0].name}
 					attributionText={data.attributionText}
 					attributionURL={attrURL}
-					refetch={refetchRandomCharacterHandler}
+					refetch={refetchCharacterHandler}
 				>
 					<CharacterDetails
 						description={data.data.results[0].description}

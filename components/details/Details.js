@@ -3,14 +3,12 @@ import {
 	ScrollView,
 	RefreshControl,
 	View,
-	Pressable,
 	Text,
 	Image,
-	Linking,
 	StyleSheet
 } from 'react-native';
 
-import Colors from '../../constants/colors';
+import Attribution from '../Attribution';
 import GlobalStyles from '../../constants/globalStyles';
 
 function Details({
@@ -48,13 +46,10 @@ function Details({
 				<View style={styles.childrenContainer}>{children}</View>
 			</ScrollView>
 
-			<Pressable
-				style={styles.attributionContainer}
-				onPress={() => Linking.openURL(attributionURL)}
-				android_ripple={{ color: Colors.primary600 }}
-			>
-				<Text style={styles.attributionText}>{attributionText}</Text>
-			</Pressable>
+			<Attribution
+				attributionText={attributionText}
+				attributionURL={attributionURL}
+			/>
 		</View>
 	);
 }
@@ -76,17 +71,5 @@ const styles = StyleSheet.create({
 	image: {
 		height: '100%',
 		resizeMode: 'cover'
-	},
-	attributionContainer: {
-		backgroundColor: Colors.primary400,
-		width: '100%'
-	},
-	attributionText: {
-		paddingVertical: 8,
-		paddingHorizontal: 16,
-		textAlign: 'center',
-		fontSize: 14,
-		color: Colors.primary700,
-		fontFamily: 'roboto-bold-italic'
 	}
 });
