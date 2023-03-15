@@ -1,5 +1,4 @@
 import { useEffect, useCallback } from 'react';
-import { View, Text } from 'react-native';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import Details from '../components/details/Details';
@@ -28,7 +27,7 @@ function CharacterScreen({ route, navigation }) {
 		  })
 		: useFetchCharacterByIdQuery(route.params.id);
 
-	const { data, isFetching, isError, isSuccess, refetch } = applicableHook;
+	const { data, isLoading, isError, isSuccess, refetch } = applicableHook;
 
 	// If displaying random character, change header title to "Random Character"
 	useEffect(() => {
@@ -48,7 +47,7 @@ function CharacterScreen({ route, navigation }) {
 		refetch();
 	}, []);
 
-	if (isFetching) {
+	if (isLoading) {
 		return <LoadingSpinner size={64} color={Colors.secondary800} />;
 	}
 

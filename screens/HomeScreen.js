@@ -88,7 +88,7 @@ function HomeScreen({ navigation }) {
 						<Button
 							onPress={searchCharacters}
 							rippleColor={Colors.primary300}
-							disabled={!enteredText || !isValidInput}
+							disabled={!isValidInput}
 							containerStyle={{ width: 200, marginVertical: 6 }}
 							textStyle={{ fontSize: 24 }}
 							mode='flat'
