@@ -1,9 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import DetailsListItem from './DetailsListItem';
 import Colors from '../../constants/colors';
 
 function CharacterDetails({ description, comics, series, stories, events }) {
+	const navigation = useNavigation();
+
 	return (
 		<View>
 			<Text style={styles.descriptionText}>
@@ -13,6 +16,7 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 			<Text style={styles.subHeading}>Featured In</Text>
 
 			<DetailsListItem
+				onPress={() => navigation.navigate('FeaturedIn', { screen: 'comics' })}
 				text1='Comics:'
 				text2={comics.available}
 				extraStyles={{
@@ -24,6 +28,7 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 				}}
 			/>
 			<DetailsListItem
+				onPress={() => navigation.navigate('FeaturedIn', { screen: 'series' })}
 				text1='Series:'
 				text2={series.available}
 				extraStyles={{
@@ -35,6 +40,7 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 				}}
 			/>
 			<DetailsListItem
+				onPress={() => navigation.navigate('FeaturedIn', { screen: 'stories' })}
 				text1='Stories:'
 				text2={stories.available}
 				extraStyles={{
@@ -46,6 +52,7 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 				}}
 			/>
 			<DetailsListItem
+				onPress={() => navigation.navigate('FeaturedIn', { screen: 'events' })}
 				text1='Events:'
 				text2={events.available}
 				extraStyles={{
