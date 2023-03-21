@@ -1,12 +1,9 @@
 import { View, FlatList, Text } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import { store } from '../store/store';
 
 function FeaturedInScreen({ route }) {
-	const headerHeight = useHeaderHeight();
-
 	let arr = [];
 
 	const state = store.getState('charactersApiSlice');
@@ -27,8 +24,8 @@ function FeaturedInScreen({ route }) {
 	}
 
 	return (
-		<ScreenTemplate>
-			<View style={{ marginTop: headerHeight }}>
+		<ScreenTemplate headerPadding={true}>
+			<View>
 				<FlatList
 					data={arr}
 					renderItem={({ item }) => {
