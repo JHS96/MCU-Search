@@ -5,8 +5,10 @@ import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import ErrorDisplay from '../components/ErrorDisplay';
 import DetailsListItem from '../components/details/DetailsListItem';
+import Attribution from '../components/Attribution';
 import { CharacterContext } from '../context/character-context';
 import { useFetchComicsByCharacterIdQuery } from '../features/comics/comicsApiSlice';
+import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
 function FeaturedInScreen() {
@@ -24,10 +26,16 @@ function FeaturedInScreen() {
 		return <ErrorDisplay />;
 	}
 
+	const attrURL = extractedAttributionURL(data.attributionHTML);
+
 	if (isSuccess) {
 		return (
 			<ScreenTemplate headerPadding={true}>
 				<View>
+					<Attribution
+						attributionText={data.attributionText}
+						attributionURL={attrURL}
+					/>
 					<FlatList
 						data={data.data.results}
 						renderItem={({ item }) => {
@@ -45,7 +53,6 @@ function FeaturedInScreen() {
 						keyExtractor={item => item.title}
 					/>
 				</View>
-				 {/* TODO - Add attribution */}
 			</ScreenTemplate>
 		);
 	}
