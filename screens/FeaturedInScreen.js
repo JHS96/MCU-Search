@@ -1,41 +1,54 @@
-import { View, FlatList, Text } from 'react-native';
+import { useContext } from 'react';
+import { View, FlatList } from 'react-native';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
-import { store } from '../store/store';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
+import ErrorDisplay from '../components/ErrorDisplay';
+import DetailsListItem from '../components/details/DetailsListItem';
+import { CharacterContext } from '../context/character-context';
+import { useFetchComicsByCharacterIdQuery } from '../features/comics/comicsApiSlice';
+import Colors from '../constants/colors';
 
-function FeaturedInScreen({ route }) {
-	let arr = [];
+function FeaturedInScreen() {
+	const characterCtx = useContext(CharacterContext);
+	const characterId = characterCtx.selectedCharacterId;
 
-	const state = store.getState('charactersApiSlice');
-	if (state.characterApi.queries.hasOwnProperty('fetchRandomCharacter(null)')) {
-		arr =
-			state.characterApi.queries['fetchRandomCharacter(null)'].data.data
-				.results[0][route.name].items;
-	} else {
-		// Extract the name of the key (including the id argument) & use said key to
-		// access the correct property of the queries object nested in state
-		const objKeysArr = Object.keys(state.characterApi.queries);
-		const idxOfKey = objKeysArr.findIndex(item =>
-			item.includes('fetchCharacterById')
-		);
-		const key = objKeysArr[idxOfKey];
-		arr =
-			state.characterApi.queries[key].data.data.results[0][route.name].items;
+	const { data, isLoading, isError, isSuccess } =
+		useFetchComicsByCharacterIdQuery(characterId);
+
+	if (isLoading) {
+		return <LoadingSpinner size={64} color={Colors.secondary800} />;
 	}
 
-	return (
-		<ScreenTemplate headerPadding={true}>
-			<View>
-				<FlatList
-					data={arr}
-					renderItem={({ item }) => {
-						return <Text key={item.name}>{item.name}</Text>;
-					}}
-					keyExtractor={item => item.name}
-				/>
-			</View>
-		</ScreenTemplate>
-	);
+	if (isError) {
+		return <ErrorDisplay />;
+	}
+
+	if (isSuccess) {
+		return (
+			<ScreenTemplate headerPadding={true}>
+				<View>
+					<FlatList
+						data={data.data.results}
+						renderItem={({ item }) => {
+							return (
+								<DetailsListItem
+									text1={item.title}
+									thumbnailUrl={
+										item.thumbnail.path +
+										'/standard_medium.' +
+										item.thumbnail.extension
+									}
+								/>
+							);
+						}}
+						keyExtractor={item => item.title}
+					/>
+				</View>
+				 {/* TODO - Add attribution */}
+			</ScreenTemplate>
+		);
+	}
 }
 
 export default FeaturedInScreen;

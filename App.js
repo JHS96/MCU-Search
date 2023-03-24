@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import CharacterScreen from './screens/CharacterScreen';
 import ListScreen from './screens/ListScreen';
 import FeaturedInScreen from './screens/FeaturedInScreen';
+import CharacterContextProvider from './context/character-context';
 import { store } from './store/store';
 
 const Stack = createNativeStackNavigator();
@@ -26,14 +27,16 @@ function FeaturedIn() {
 export default function App() {
 	return (
 		<Provider store={store}>
-			<NavigationContainer>
-				<Stack.Navigator screenOptions={{ headerTransparent: true }}>
-					<Stack.Screen name='Home' component={HomeScreen} />
-					<Stack.Screen name='Character' component={CharacterScreen} />
-					<Stack.Screen name='List' component={ListScreen} />
-					<Stack.Screen name='FeaturedIn' component={FeaturedIn} />
-				</Stack.Navigator>
-			</NavigationContainer>
+			<CharacterContextProvider>
+				<NavigationContainer>
+					<Stack.Navigator screenOptions={{ headerTransparent: true }}>
+						<Stack.Screen name='Home' component={HomeScreen} />
+						<Stack.Screen name='Character' component={CharacterScreen} />
+						<Stack.Screen name='List' component={ListScreen} />
+						<Stack.Screen name='FeaturedIn' component={FeaturedIn} />
+					</Stack.Navigator>
+				</NavigationContainer>
+			</CharacterContextProvider>
 		</Provider>
 	);
 }

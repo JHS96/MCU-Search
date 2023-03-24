@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { ToastAndroid } from 'react-native';
 
 import DetailsListItem from './DetailsListItem';
 import Colors from '../../constants/colors';
@@ -16,7 +17,13 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 			<Text style={styles.subHeading}>Featured In</Text>
 
 			<DetailsListItem
-				onPress={() => navigation.navigate('FeaturedIn', { screen: 'comics' })}
+				onPress={
+					comics.available > 0
+						? () => navigation.navigate('FeaturedIn', { screen: 'comics' })
+						: () => {
+								ToastAndroid.show('No results to display', ToastAndroid.SHORT);
+						  }
+				}
 				text1='Comics:'
 				text2={comics.available}
 				extraStyles={{
@@ -28,7 +35,13 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 				}}
 			/>
 			<DetailsListItem
-				onPress={() => navigation.navigate('FeaturedIn', { screen: 'series' })}
+				onPress={
+					series.available > 0
+						? () => navigation.navigate('FeaturedIn', { screen: 'series' })
+						: () => {
+								ToastAndroid.show('No results to display', ToastAndroid.SHORT);
+						  }
+				}
 				text1='Series:'
 				text2={series.available}
 				extraStyles={{
@@ -40,7 +53,13 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 				}}
 			/>
 			<DetailsListItem
-				onPress={() => navigation.navigate('FeaturedIn', { screen: 'stories' })}
+				onPress={
+					stories.available > 0
+						? () => navigation.navigate('FeaturedIn', { screen: 'stories' })
+						: () => {
+								ToastAndroid.show('No results to display', ToastAndroid.SHORT);
+						  }
+				}
 				text1='Stories:'
 				text2={stories.available}
 				extraStyles={{
@@ -52,7 +71,13 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 				}}
 			/>
 			<DetailsListItem
-				onPress={() => navigation.navigate('FeaturedIn', { screen: 'events' })}
+				onPress={
+					events.available > 0
+						? () => navigation.navigate('FeaturedIn', { screen: 'events' })
+						: () => {
+								ToastAndroid.show('No results to display', ToastAndroid.SHORT);
+						  }
+				}
 				text1='Events:'
 				text2={events.available}
 				extraStyles={{

@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useContext } from 'react';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import Details from '../components/details/Details';
@@ -9,10 +9,13 @@ import {
 	useFetchRandomCharacterQuery,
 	useFetchCharacterByIdQuery
 } from '../features/characters/charactersApiSlice';
+import { CharacterContext } from '../context/character-context';
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
 function CharacterScreen({ route, navigation }) {
+	const characterCtx = useContext(CharacterContext);
+
 	// If route has a randomCharacter=true param, automatically fetch and display random character
 	let skip = true;
 
@@ -29,8 +32,8 @@ function CharacterScreen({ route, navigation }) {
 
 	const { data, isLoading, isError, isSuccess, refetch } = applicableHook;
 
-	// If displaying random character, change header title to "Random Character"
 	useEffect(() => {
+		// If displaying random character, change header title to "Random Character"
 		if (route.params?.randomCharacter) {
 			navigation.setOptions({
 				title: 'Random Character'
@@ -41,7 +44,12 @@ function CharacterScreen({ route, navigation }) {
 		if (isError) {
 			navigation.setOptions({ title: 'Error' });
 		}
-	}, [navigation, isError]);
+
+		// On successful fetch, save selectedCharacterId in context for use by other components
+		if (isSuccess) {
+			characterCtx.setSelectedCharacterId(data.data.results[0].id);
+		}
+	}, [navigation, isError, isSuccess]);
 
 	const refetchCharacterHandler = useCallback(() => {
 		refetch();
