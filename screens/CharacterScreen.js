@@ -49,7 +49,7 @@ function CharacterScreen({ route, navigation }) {
 		if (isSuccess) {
 			characterCtx.setSelectedCharacterId(data.data.results[0].id);
 		}
-	}, [navigation, isError, isSuccess]);
+	}, [navigation, isError, isSuccess, data]);
 
 	const refetchCharacterHandler = useCallback(() => {
 		refetch();
