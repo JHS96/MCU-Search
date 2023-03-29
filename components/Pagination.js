@@ -25,13 +25,20 @@ function Pagination({ itemsPerPage, totalNumItems }) {
 		}
 	}
 
+	function arrowBtnHandler(mode) {
+		if (mode === 'next') setPage(curPage => curPage + 1);
+		else if (mode === 'previous') setPage(curPage => curPage - 1);
+	}
+
 	return (
 		<View style={styles.pagination}>
 			<IconButton
 				name='caret-back-sharp'
 				size={30}
 				color={Colors.black}
-				rippleColor={Colors.black}
+				rippleColor={Colors.gray500}
+				onPress={() => arrowBtnHandler('previous')}
+				isDisabled={page === 1}
 			/>
 
 			<Picker
@@ -39,6 +46,7 @@ function Pagination({ itemsPerPage, totalNumItems }) {
 				style={styles.picker}
 				selectedValue={page}
 				onValueChange={itemValue => setPage(itemValue)}
+				enabled={numOfPages > 1}
 			>
 				{pickerItemArr.map(i => (
 					<Picker.Item
@@ -58,7 +66,9 @@ function Pagination({ itemsPerPage, totalNumItems }) {
 				name='caret-forward-sharp'
 				size={30}
 				color={Colors.black}
-				rippleColor={Colors.black}
+				rippleColor={Colors.gray500}
+				onPress={() => arrowBtnHandler('next')}
+				isDisabled={page === numOfPages}
 			/>
 		</View>
 	);
@@ -75,7 +85,7 @@ const styles = StyleSheet.create({
 		flex: 2
 	},
 	pickerItem: {
-    fontSize: 18
+		fontSize: 18
 	},
 	totalContainer: {
 		flex: 1,
@@ -85,5 +95,8 @@ const styles = StyleSheet.create({
 		fontFamily: 'roboto-bold-italic',
 		fontSize: 20,
 		textAlign: 'left'
+	},
+	arrowBtnDisabled: {
+		color: Colors.gray500
 	}
 });

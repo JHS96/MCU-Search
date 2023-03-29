@@ -9,6 +9,7 @@ const Colors = {
 	secondary600: '#937A47',
 	seconadry500: '#AC915D',
 	black: '#000000',
+	gray500: '#424242',
 	danger: '#b32323'
 };
 
