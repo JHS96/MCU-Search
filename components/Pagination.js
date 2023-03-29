@@ -5,9 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 import IconButton from './ui/IconButton';
 import Colors from '../constants/colors';
 
-function Pagination({ itemsPerPage, totalNumItems }) {
-	const [page, setPage] = useState(1);
-
+function Pagination({ itemsPerPage, totalNumItems, page, setPage }) {
 	const numOfPages = Math.ceil(totalNumItems / itemsPerPage);
 	const pickerItemArr = [];
 

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
@@ -16,10 +16,11 @@ function FeaturedInScreen() {
 	const characterCtx = useContext(CharacterContext);
 	const characterId = characterCtx.selectedCharacterId;
 
+	const [page, setPage] = useState(1);
 	const perPage = 20;
 
 	const { data, isLoading, isError, isSuccess } =
-		useFetchComicsByCharacterIdQuery(characterId);
+		useFetchComicsByCharacterIdQuery({ page, perPage, characterId });
 
 	if (isLoading) {
 		return <LoadingSpinner size={64} color={Colors.secondary800} />;
@@ -40,7 +41,12 @@ function FeaturedInScreen() {
 						attributionURL={attrURL}
 					/>
 
-					<Pagination itemsPerPage={perPage} totalNumItems={data.data.total} />
+					<Pagination
+						itemsPerPage={perPage}
+						totalNumItems={data.data.total}
+						page={page}
+						setPage={setPage}
+					/>
 
 					<View style={styles.listContainer}>
 						<FlatList

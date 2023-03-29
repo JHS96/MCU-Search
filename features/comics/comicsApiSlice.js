@@ -12,10 +12,10 @@ export const comicsApiSlice = createApi({
 	}),
 	endpoints: build => ({
 		fetchComicsByCharacterId: build.query({
-			query: id => {
-				return `/comics?characters=${id}&ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5Hash(
+			query: ({ page, perPage, characterId }) => {
+				return `/comics?characters=${characterId}&ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5Hash(
 					timeStamp
-				)}`;
+				)}&offset=${(page - 1) * perPage}&limit=${perPage}`;
 			}
 		})
 	})

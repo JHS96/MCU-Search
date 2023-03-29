@@ -2,7 +2,6 @@ import { Pressable, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 function IconButton({ name, size, color, rippleColor, onPress, isDisabled }) {
-	console.log(isDisabled);
 	return (
 		<Pressable
 			style={styles.pressable}
