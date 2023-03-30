@@ -3,7 +3,7 @@ import { FlatList, View, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
-import DetailsListItem from '../components/details/DetailsListItem';
+import ListItem from '../components/details/ListItem';
 import Attribution from '../components/Attribution';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import ErrorDisplay from '../components/ErrorDisplay';
@@ -41,6 +41,8 @@ function ListScreen({ route, navigation }) {
 
 		return (
 			<ScreenTemplate headerPadding={true}>
+				<Text style={styles.resultCount}>{data.data.total} Results</Text>
+
 				{!data.data.results.length && (
 					<View style={styles.noResultsTextContainer}>
 						<Text style={styles.noResultsText1}>
@@ -54,15 +56,17 @@ function ListScreen({ route, navigation }) {
 
 				<FlatList
 					data={data.data.results}
-					renderItem={({ item }) => (
-						<DetailsListItem
+					renderItem={({ item, index }) => (
+						<ListItem
 							onPress={() => navigation.navigate('Character', { id: item.id })}
+							smallText={index + 1}
 							text1={item.name}
 							thumbnailUrl={
 								item.thumbnail.path +
 								'/standard_medium.' +
 								item.thumbnail.extension
 							}
+							extraStyles={{ text1: { fontSize: 26 } }}
 						/>
 					)}
 					keyExtractor={item => item.id}
@@ -86,6 +90,13 @@ function ListScreen({ route, navigation }) {
 export default ListScreen;
 
 const styles = StyleSheet.create({
+	resultCount: {
+		textAlign: 'center',
+		fontSize: 24,
+		fontFamily: 'roboto-bold',
+		textDecorationLine: 'underline',
+		marginBottom: 10
+	},
 	listContainer: {
 		flex: 1
 	},

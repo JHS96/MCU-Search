@@ -4,7 +4,7 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import ErrorDisplay from '../components/ErrorDisplay';
-import DetailsListItem from '../components/details/DetailsListItem';
+import ListItem from '../components/details/ListItem';
 import Attribution from '../components/Attribution';
 import Pagination from '../components/Pagination';
 import { CharacterContext } from '../context/character-context';
@@ -51,19 +51,21 @@ function FeaturedInScreen() {
 					<View style={styles.listContainer}>
 						<FlatList
 							data={data.data.results}
-							renderItem={({ item }) => {
+							renderItem={({ item, index }) => {
 								return (
-									<DetailsListItem
+									<ListItem
+										smallText={index + 1 + page * perPage - perPage} // 0+1+(1*20)-20=1; 0+1+(2*20)-20=21 etc.
 										text1={item.title}
 										thumbnailUrl={
 											item.thumbnail.path +
 											'/standard_medium.' +
 											item.thumbnail.extension
 										}
+										extraStyles={{ text1: { fontSize: 24 } }}
 									/>
 								);
 							}}
-							keyExtractor={item => item.title}
+							keyExtractor={item => item.id}
 						/>
 					</View>
 				</View>

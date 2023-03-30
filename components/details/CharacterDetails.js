@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ToastAndroid } from 'react-native';
 
-import DetailsListItem from './DetailsListItem';
+import ListItem from './ListItem';
 import Colors from '../../constants/colors';
 
 function CharacterDetails({ description, comics, series, stories, events }) {
@@ -16,7 +16,7 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 
 			<Text style={styles.subHeading}>Featured In</Text>
 
-			<DetailsListItem
+			<ListItem
 				onPress={
 					comics.available > 0
 						? () => navigation.navigate('FeaturedIn', { screen: 'comics' })
@@ -34,7 +34,7 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 					}
 				}}
 			/>
-			<DetailsListItem
+			<ListItem
 				onPress={
 					series.available > 0
 						? () => navigation.navigate('FeaturedIn', { screen: 'series' })
@@ -52,7 +52,7 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 					}
 				}}
 			/>
-			<DetailsListItem
+			<ListItem
 				onPress={
 					stories.available > 0
 						? () => navigation.navigate('FeaturedIn', { screen: 'stories' })
@@ -70,7 +70,7 @@ function CharacterDetails({ description, comics, series, stories, events }) {
 					}
 				}}
 			/>
-			<DetailsListItem
+			<ListItem
 				onPress={
 					events.available > 0
 						? () => navigation.navigate('FeaturedIn', { screen: 'events' })
