@@ -9,18 +9,34 @@ import Attribution from '../components/Attribution';
 import Pagination from '../components/Pagination';
 import { CharacterContext } from '../context/character-context';
 import { useFetchComicsByCharacterIdQuery } from '../features/comics/comicsApiSlice';
+import { useFetchSeriesByCharacterIdQuery } from '../features/series/seriesApiSlice';
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
-function FeaturedInScreen() {
+function FeaturedInScreen({ route }) {
 	const characterCtx = useContext(CharacterContext);
 	const characterId = characterCtx.selectedCharacterId;
 
 	const [page, setPage] = useState(1);
 	const perPage = 20;
 
-	const { data, isLoading, isError, isSuccess } =
-		useFetchComicsByCharacterIdQuery({ page, perPage, characterId });
+	let applicableHook;
+
+	if (route.name === 'comics') {
+		applicableHook = useFetchComicsByCharacterIdQuery({
+			page,
+			perPage,
+			characterId
+		});
+	} else if (route.name === 'series') {
+		applicableHook = useFetchSeriesByCharacterIdQuery({
+			page,
+			perPage,
+			characterId
+		});
+	}
+
+	const { data, isLoading, isError, isSuccess } = applicableHook;
 
 	if (isLoading) {
 		return <LoadingSpinner size={64} color={Colors.secondary800} />;
