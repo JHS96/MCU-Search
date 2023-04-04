@@ -11,6 +11,7 @@ import { CharacterContext } from '../context/character-context';
 import { useFetchComicsByCharacterIdQuery } from '../features/comics/comicsApiSlice';
 import { useFetchSeriesByCharacterIdQuery } from '../features/series/seriesApiSlice';
 import { useFetchStoriesByCharacterIdQuery } from '../features/stories/storiesApiSlice';
+import { useFetchEventsByCharacterIdQuery } from '../features/events/eventsApiSlice';
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
@@ -37,6 +38,12 @@ function FeaturedInScreen({ route }) {
 		});
 	} else if (route.name === 'stories') {
 		applicableHook = useFetchStoriesByCharacterIdQuery({
+			page,
+			perPage,
+			characterId
+		});
+	} else if (route.name === 'events') {
+		applicableHook = useFetchEventsByCharacterIdQuery({
 			page,
 			perPage,
 			characterId
