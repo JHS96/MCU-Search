@@ -10,6 +10,7 @@ import Pagination from '../components/Pagination';
 import { CharacterContext } from '../context/character-context';
 import { useFetchComicsByCharacterIdQuery } from '../features/comics/comicsApiSlice';
 import { useFetchSeriesByCharacterIdQuery } from '../features/series/seriesApiSlice';
+import { useFetchStoriesByCharacterIdQuery } from '../features/stories/storiesApiSlice';
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
@@ -30,6 +31,12 @@ function FeaturedInScreen({ route }) {
 		});
 	} else if (route.name === 'series') {
 		applicableHook = useFetchSeriesByCharacterIdQuery({
+			page,
+			perPage,
+			characterId
+		});
+	} else if (route.name === 'stories') {
+		applicableHook = useFetchStoriesByCharacterIdQuery({
 			page,
 			perPage,
 			characterId
@@ -73,9 +80,10 @@ function FeaturedInScreen({ route }) {
 										smallText={index + 1 + page * perPage - perPage} // 0+1+(1*20)-20=1; 0+1+(2*20)-20=21 etc.
 										text1={item.title}
 										thumbnailUrl={
+											item.thumbnail &&
 											item.thumbnail.path +
-											'/standard_medium.' +
-											item.thumbnail.extension
+												'/standard_medium.' +
+												item.thumbnail.extension
 										}
 										extraStyles={{ text1: { fontSize: 24 } }}
 									/>
