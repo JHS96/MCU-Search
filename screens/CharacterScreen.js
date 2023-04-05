@@ -45,9 +45,15 @@ function CharacterScreen({ route, navigation }) {
 			navigation.setOptions({ title: 'Error' });
 		}
 
-		// On successful fetch, save selectedCharacterId in context for use by other components
+		// On successful fetch, save selected haracter details in context for use by other components
 		if (isSuccess) {
 			characterCtx.setSelectedCharacterId(data.data.results[0].id);
+			characterCtx.setFeaturedInDetails({
+				numComics: data.data.results[0].comics.available,
+				numSeries: data.data.results[0].series.available,
+				numStories: data.data.results[0].stories.available,
+				numEvents: data.data.results[0].events.available
+			});
 		}
 	}, [navigation, isError, isSuccess, data]);
 

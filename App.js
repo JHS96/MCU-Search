@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -9,17 +10,29 @@ import ListScreen from './screens/ListScreen';
 import FeaturedInScreen from './screens/FeaturedInScreen';
 import CharacterContextProvider from './context/character-context';
 import { store } from './store/store';
+import { CharacterContext } from './context/character-context';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createMaterialBottomTabNavigator();
 
 function FeaturedIn() {
+	const characterCtx = useContext(CharacterContext);
+	const featuredIn = characterCtx.featuredInDetails;
+
 	return (
-		<BottomTabs.Navigator>
-			<BottomTabs.Screen name='comics' component={FeaturedInScreen} />
-			<BottomTabs.Screen name='series' component={FeaturedInScreen} />
-			<BottomTabs.Screen name='stories' component={FeaturedInScreen} />
-			<BottomTabs.Screen name='events' component={FeaturedInScreen} />
+		<BottomTabs.Navigator backBehavior='history'>
+			{featuredIn.numComics > 0 && (
+				<BottomTabs.Screen name='comics' component={FeaturedInScreen} />
+			)}
+			{featuredIn.numSeries > 0 && (
+				<BottomTabs.Screen name='series' component={FeaturedInScreen} />
+			)}
+			{featuredIn.numStories > 0 && (
+				<BottomTabs.Screen name='stories' component={FeaturedInScreen} />
+			)}
+			{featuredIn.numEvents > 0 && (
+				<BottomTabs.Screen name='events' component={FeaturedInScreen} />
+			)}
 		</BottomTabs.Navigator>
 	);
 }
