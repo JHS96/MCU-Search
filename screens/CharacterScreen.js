@@ -45,7 +45,7 @@ function CharacterScreen({ route, navigation }) {
 			navigation.setOptions({ title: 'Error' });
 		}
 
-		// On successful fetch, save selected haracter details in context for use by other components
+		// On successful fetch, save selected character details in context for use by other components
 		if (isSuccess) {
 			characterCtx.setSelectedCharacterId(data.data.results[0].id);
 			characterCtx.setFeaturedInDetails({

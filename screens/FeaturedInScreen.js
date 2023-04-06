@@ -15,7 +15,7 @@ import { useFetchEventsByCharacterIdQuery } from '../features/events/eventsApiSl
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
-function FeaturedInScreen({ route }) {
+function FeaturedInScreen({ route, navigation }) {
 	const characterCtx = useContext(CharacterContext);
 	const characterId = characterCtx.selectedCharacterId;
 
@@ -93,6 +93,12 @@ function FeaturedInScreen({ route }) {
 												item.thumbnail.extension
 										}
 										extraStyles={{ text1: { fontSize: 24 } }}
+										onPress={() =>
+											navigation.navigate('FeaturedInDetails', {
+												featuredInType: route.name,
+												id: item.id
+											})
+										}
 									/>
 								);
 							}}

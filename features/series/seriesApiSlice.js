@@ -17,8 +17,16 @@ export const seriesApiSlice = createApi({
 					timeStamp
 				)}&offset=${(page - 1) * perPage}&limit=${perPage}`;
 			}
+		}),
+		fetchSeriesById: build.query({
+			query: seriesId => {
+				return `/series/${seriesId}?ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5Hash(
+					timeStamp
+				)}`;
+			}
 		})
 	})
 });
 
-export const { useFetchSeriesByCharacterIdQuery } = seriesApiSlice;
+export const { useFetchSeriesByCharacterIdQuery, useFetchSeriesByIdQuery } =
+	seriesApiSlice;

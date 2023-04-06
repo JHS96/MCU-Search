@@ -17,8 +17,16 @@ export const comicsApiSlice = createApi({
 					timeStamp
 				)}&offset=${(page - 1) * perPage}&limit=${perPage}`;
 			}
+		}),
+		fetchComicById: build.query({
+			query: comicId => {
+				return `/comics/${comicId}?ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5Hash(
+					timeStamp
+				)}`;
+			}
 		})
 	})
 });
 
-export const { useFetchComicsByCharacterIdQuery } = comicsApiSlice;
+export const { useFetchComicsByCharacterIdQuery, useFetchComicByIdQuery } =
+	comicsApiSlice;

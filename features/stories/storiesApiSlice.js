@@ -17,8 +17,16 @@ export const storiesApiSlice = createApi({
 					timeStamp
 				)}&offset=${(page - 1) * perPage}&limit=${perPage}`;
 			}
+		}),
+		fetchStoryById: build.query({
+			query: storyId => {
+				return `/stories/${storyId}?ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5Hash(
+					timeStamp
+				)}`;
+			}
 		})
 	})
 });
 
-export const { useFetchStoriesByCharacterIdQuery } = storiesApiSlice;
+export const { useFetchStoriesByCharacterIdQuery, useFetchStoryByIdQuery } =
+	storiesApiSlice;

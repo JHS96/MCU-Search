@@ -17,8 +17,16 @@ export const eventsApiSlice = createApi({
 					timeStamp
 				)}&offset=${(page - 1) * perPage}&limit=${perPage}`;
 			}
+		}),
+		fetchEventById: build.query({
+			query: eventId => {
+				return `/events/${eventId}?ts=${timeStamp}&apikey=${PUBLIC_KEY}&hash=${md5Hash(
+					timeStamp
+				)}`;
+			}
 		})
 	})
 });
 
-export const { useFetchEventsByCharacterIdQuery } = eventsApiSlice;
+export const { useFetchEventsByCharacterIdQuery, useFetchEventByIdQuery } =
+	eventsApiSlice;

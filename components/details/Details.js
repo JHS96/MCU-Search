@@ -35,9 +35,11 @@ function Details({
 				}
 			>
 				<View>
-					<View style={styles.imageContainer}>
-						<Image source={{ uri: imageSource }} style={styles.image} />
-					</View>
+					{imageSource && (
+						<View style={styles.imageContainer}>
+							<Image source={{ uri: imageSource }} style={styles.image} />
+						</View>
+					)}
 					<View style={GlobalStyles.headingContainer}>
 						<Text style={GlobalStyles.headingText}>{heading}</Text>
 					</View>

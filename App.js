@@ -8,6 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import CharacterScreen from './screens/CharacterScreen';
 import ListScreen from './screens/ListScreen';
 import FeaturedInScreen from './screens/FeaturedInScreen';
+import FeaturedInDetailsScreen from './screens/FeaturedInDetailsScreen';
 import CharacterContextProvider from './context/character-context';
 import { store } from './store/store';
 import { CharacterContext } from './context/character-context';
@@ -47,6 +48,10 @@ export default function App() {
 						<Stack.Screen name='Character' component={CharacterScreen} />
 						<Stack.Screen name='List' component={ListScreen} />
 						<Stack.Screen name='FeaturedIn' component={FeaturedIn} />
+						<Stack.Screen
+							name='FeaturedInDetails'
+							component={FeaturedInDetailsScreen}
+						/>
 					</Stack.Navigator>
 				</NavigationContainer>
 			</CharacterContextProvider>
