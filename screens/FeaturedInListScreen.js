@@ -7,7 +7,7 @@ import ErrorDisplay from '../components/ErrorDisplay';
 import ListItem from '../components/details/ListItem';
 import Attribution from '../components/Attribution';
 import Pagination from '../components/Pagination';
-import { CharacterContext } from '../context/character-context';
+import { CharacterContext } from '../store/context/character-context';
 import { useFetchComicsByCharacterIdQuery } from '../features/comics/comicsApiSlice';
 import { useFetchSeriesByCharacterIdQuery } from '../features/series/seriesApiSlice';
 import { useFetchStoriesByCharacterIdQuery } from '../features/stories/storiesApiSlice';
@@ -15,7 +15,7 @@ import { useFetchEventsByCharacterIdQuery } from '../features/events/eventsApiSl
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
-function FeaturedInScreen({ route, navigation }) {
+function FeaturedInListScreen({ route, navigation }) {
 	const characterCtx = useContext(CharacterContext);
 	const characterId = characterCtx.selectedCharacterId;
 
@@ -111,7 +111,7 @@ function FeaturedInScreen({ route, navigation }) {
 	}
 }
 
-export default FeaturedInScreen;
+export default FeaturedInListScreen;
 
 const styles = StyleSheet.create({
 	listContainer: {

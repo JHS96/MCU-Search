@@ -9,7 +9,7 @@ import {
 	useFetchRandomCharacterQuery,
 	useFetchCharacterByIdQuery
 } from '../features/characters/charactersApiSlice';
-import { CharacterContext } from '../context/character-context';
+import { CharacterContext } from '../store/context/character-context';
 import { extractedAttributionURL } from '../util/utilityFunctions';
 import Colors from '../constants/colors';
 
