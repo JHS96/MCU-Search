@@ -83,6 +83,7 @@ function CharacterScreen({ route, navigation }) {
 					heading={data.data.results[0].name}
 					attributionText={data.attributionText}
 					attributionURL={attrURL}
+					isRefreshable={route.params.randomCharacter && true}
 					refetch={refetchCharacterHandler}
 				>
 					<CharacterDetails

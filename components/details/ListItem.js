@@ -7,11 +7,13 @@ function ListItem({
 	text1,
 	text2,
 	thumbnailUrl,
+	isNotPressable,
 	onPress,
 	extraStyles
 }) {
 	return (
 		<Pressable
+			disabled={isNotPressable}
 			onPress={onPress}
 			android_ripple={{ color: Colors.primary600, foreground: true }}
 			style={[styles.rootContainer, extraStyles?.rootContainer]}

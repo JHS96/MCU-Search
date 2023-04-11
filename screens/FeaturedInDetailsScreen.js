@@ -4,6 +4,7 @@ import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import ErrorDisplay from '../components/ErrorDisplay';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import Details from '../components/details/Details';
+import ComicDetails from '../components/details/ComicDetails';
 import { useFetchComicByIdQuery } from '../features/comics/comicsApiSlice';
 import { useFetchSeriesByIdQuery } from '../features/series/seriesApiSlice';
 import { useFetchStoryByIdQuery } from '../features/stories/storiesApiSlice';
@@ -37,6 +38,18 @@ function FeaturedInDetailsScreen({ route }) {
 	if (isSuccess) {
 		const attrURL = extractedAttributionURL(data.attributionHTML);
 
+		let info;
+		if (route.params.featuredInType === 'comics') {
+			info = (
+				<ComicDetails
+					title={data.data.results[0].title}
+					issueNumber={data.data.results[0].issueNumber}
+					format={data.data.results[0].format}
+					pageCount={data.data.results[0].pageCount}
+				/>
+			);
+		}
+
 		return (
 			<ScreenTemplate headerPadding={true}>
 				<Details
@@ -57,6 +70,8 @@ function FeaturedInDetailsScreen({ route }) {
 								: data.data.results[0].description}
 						</Text>
 					</View>
+
+					<View>{info}</View>
 				</Details>
 			</ScreenTemplate>
 		);

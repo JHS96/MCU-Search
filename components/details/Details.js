@@ -16,6 +16,7 @@ function Details({
 	heading,
 	attributionText,
 	attributionURL,
+	isRefreshable,
 	refetch,
 	children
 }) {
@@ -31,7 +32,9 @@ function Details({
 		<View style={styles.rootContainer}>
 			<ScrollView
 				refreshControl={
-					<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+					isRefreshable && (
+						<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+					)
 				}
 			>
 				<View>
