@@ -3,7 +3,7 @@ import { View, Linking } from 'react-native';
 import ListItem from './ListItem';
 import Colors from '../../constants/colors';
 
-function ComicDetails({ title, issueNumber, format, pageCount, detailsURL }) {
+function SeriesDetails({ title, startYear, endYear, rating, detailsURL }) {
 	return (
 		<View>
 			<ListItem
@@ -12,7 +12,7 @@ function ComicDetails({ title, issueNumber, format, pageCount, detailsURL }) {
 					text2: { fontSize: 20, fontFamily: 'roboto-italic' }
 				}}
 				isNotPressable={true}
-				text1='Title:'
+				text1={'Title:'}
 				text2={title}
 			/>
 			<ListItem
@@ -21,8 +21,8 @@ function ComicDetails({ title, issueNumber, format, pageCount, detailsURL }) {
 					text2: { fontSize: 20, fontFamily: 'roboto-italic' }
 				}}
 				isNotPressable={true}
-				text1='Issue Number:'
-				text2={issueNumber}
+				text1={'Start Year:'}
+				text2={startYear}
 			/>
 			<ListItem
 				extraStyles={{
@@ -30,8 +30,8 @@ function ComicDetails({ title, issueNumber, format, pageCount, detailsURL }) {
 					text2: { fontSize: 20, fontFamily: 'roboto-italic' }
 				}}
 				isNotPressable={true}
-				text1='Format:'
-				text2={format}
+				text1={'End Year:'}
+				text2={endYear}
 			/>
 			<ListItem
 				extraStyles={{
@@ -39,8 +39,8 @@ function ComicDetails({ title, issueNumber, format, pageCount, detailsURL }) {
 					text2: { fontSize: 20, fontFamily: 'roboto-italic' }
 				}}
 				isNotPressable={true}
-				text1='Page Count:'
-				text2={pageCount}
+				text1={'Rating:'}
+				text2={rating}
 			/>
 			<ListItem
 				extraStyles={{
@@ -57,4 +57,4 @@ function ComicDetails({ title, issueNumber, format, pageCount, detailsURL }) {
 	);
 }
 
-export default ComicDetails;
+export default SeriesDetails;

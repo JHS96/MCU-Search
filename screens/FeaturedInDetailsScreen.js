@@ -5,6 +5,9 @@ import ErrorDisplay from '../components/ErrorDisplay';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import Details from '../components/details/Details';
 import ComicDetails from '../components/details/ComicDetails';
+import SeriesDetails from '../components/details/SeriesDetails';
+import StoryDetails from '../components/details/StoryDetails';
+import EventDetails from '../components/details/EventDetails';
 import { useFetchComicByIdQuery } from '../features/comics/comicsApiSlice';
 import { useFetchSeriesByIdQuery } from '../features/series/seriesApiSlice';
 import { useFetchStoryByIdQuery } from '../features/stories/storiesApiSlice';
@@ -46,6 +49,36 @@ function FeaturedInDetailsScreen({ route }) {
 					issueNumber={data.data.results[0].issueNumber}
 					format={data.data.results[0].format}
 					pageCount={data.data.results[0].pageCount}
+					detailsURL={data.data.results[0].urls[0].url}
+				/>
+			);
+		} else if (route.params.featuredInType === 'series') {
+			info = (
+				<SeriesDetails
+					title={data.data.results[0].title}
+					startYear={data.data.results[0].startYear}
+					endYear={data.data.results[0].endYear}
+					rating={
+						data.data.results[0].rating
+							? data.data.results[0].rating
+							: 'Not available'
+					}
+					detailsURL={data.data.results[0].urls[0].url}
+				/>
+			);
+		} else if (route.params.featuredInType === 'stories') {
+			const storyType =
+				data.data.results[0].type.charAt(0).toUpperCase() +
+				data.data.results[0].type.slice(1);
+
+			info = (
+				<StoryDetails title={data.data.results[0].title} type={storyType} />
+			);
+		} else if (route.params.featuredInType === 'events') {
+			info = (
+				<EventDetails
+					title={data.data.results[0].title}
+					detailsURL={data.data.results[0].urls[0].url}
 				/>
 			);
 		}
