@@ -41,7 +41,9 @@ function ListScreen({ route, navigation }) {
 
 		return (
 			<ScreenTemplate headerPadding={true}>
-				<Text style={styles.resultCount}>{data.data.total} Results</Text>
+				<Text style={styles.resultCount}>
+					{data.data.total} {data.data.total === 1 ? 'Result' : 'Results'}
+				</Text>
 
 				{!data.data.results.length && (
 					<View style={styles.noResultsTextContainer}>

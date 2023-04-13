@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Provider } from 'react-redux';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeScreen from './screens/HomeScreen';
 import CharacterScreen from './screens/CharacterScreen';
@@ -12,6 +13,7 @@ import FeaturedInDetailsScreen from './screens/FeaturedInDetailsScreen';
 import CharacterContextProvider from './store/context/character-context';
 import { store } from './store/store';
 import { CharacterContext } from './store/context/character-context';
+import Colors from './constants/colors';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createMaterialBottomTabNavigator();
@@ -21,18 +23,59 @@ function FeaturedIn() {
 	const featuredIn = characterCtx.featuredInDetails;
 
 	return (
-		<BottomTabs.Navigator backBehavior='history'>
+		<BottomTabs.Navigator
+			backBehavior='history'
+			barStyle={{ backgroundColor: Colors.primary600 }}
+			shifting={true}
+		>
 			{featuredIn.numComics > 0 && (
-				<BottomTabs.Screen name='comics' component={FeaturedInListScreen} />
+				<BottomTabs.Screen
+					name='comics'
+					component={FeaturedInListScreen}
+					options={{
+						tabBarLabel: 'Comics',
+						tabBarIcon: ({ tintColor }) => (
+							<Ionicons name='book-outline' size={26} color={tintColor} />
+						),
+						tabBarColor: Colors.danger
+					}}
+				/>
 			)}
 			{featuredIn.numSeries > 0 && (
-				<BottomTabs.Screen name='series' component={FeaturedInListScreen} />
+				<BottomTabs.Screen
+					name='series'
+					component={FeaturedInListScreen}
+					options={{
+						tabBarLabel: 'Series',
+						tabBarIcon: ({ tintColor }) => (
+							<Ionicons name='library-outline' size={26} color={tintColor} />
+						)
+					}}
+				/>
 			)}
 			{featuredIn.numStories > 0 && (
-				<BottomTabs.Screen name='stories' component={FeaturedInListScreen} />
+				<BottomTabs.Screen
+					name='stories'
+					component={FeaturedInListScreen}
+					options={{
+						tabBarLabel: 'Stories',
+						tabBarIcon: ({ tintColor }) => (
+							<Ionicons name='newspaper-outline' size={26} color={tintColor} />
+						)
+					}}
+				/>
 			)}
 			{featuredIn.numEvents > 0 && (
-				<BottomTabs.Screen name='events' component={FeaturedInListScreen} />
+				<BottomTabs.Screen
+					name='events'
+					component={FeaturedInListScreen}
+					options={{
+						tabBarLabel: 'Events',
+						tabBarIcon: ({ tintColor }) => (
+							<Ionicons name='alarm-outline' size={26} color={tintColor} />
+						)
+					}}
+				/>
 			)}
 		</BottomTabs.Navigator>
 	);
