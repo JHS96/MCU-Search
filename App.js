@@ -34,10 +34,10 @@ function FeaturedIn() {
 					component={FeaturedInListScreen}
 					options={{
 						tabBarLabel: 'Comics',
-						tabBarIcon: ({ tintColor }) => (
-							<Ionicons name='book-outline' size={26} color={tintColor} />
+						tabBarIcon: ({ color }) => (
+							<Ionicons name='book-outline' size={26} color={color} />
 						),
-						tabBarColor: Colors.danger
+						tabBarBadge: featuredIn.numComics
 					}}
 				/>
 			)}
@@ -47,9 +47,10 @@ function FeaturedIn() {
 					component={FeaturedInListScreen}
 					options={{
 						tabBarLabel: 'Series',
-						tabBarIcon: ({ tintColor }) => (
-							<Ionicons name='library-outline' size={26} color={tintColor} />
-						)
+						tabBarIcon: ({ color }) => (
+							<Ionicons name='library-outline' size={26} color={color} />
+						),
+						tabBarBadge: featuredIn.numSeries
 					}}
 				/>
 			)}
@@ -59,9 +60,10 @@ function FeaturedIn() {
 					component={FeaturedInListScreen}
 					options={{
 						tabBarLabel: 'Stories',
-						tabBarIcon: ({ tintColor }) => (
-							<Ionicons name='newspaper-outline' size={26} color={tintColor} />
-						)
+						tabBarIcon: ({ color }) => (
+							<Ionicons name='newspaper-outline' size={26} color={color} />
+						),
+						tabBarBadge: featuredIn.numStories
 					}}
 				/>
 			)}
@@ -71,9 +73,10 @@ function FeaturedIn() {
 					component={FeaturedInListScreen}
 					options={{
 						tabBarLabel: 'Events',
-						tabBarIcon: ({ tintColor }) => (
-							<Ionicons name='alarm-outline' size={26} color={tintColor} />
-						)
+						tabBarIcon: ({ color }) => (
+							<Ionicons name='alarm-outline' size={26} color={color} />
+						),
+						tabBarBadge: featuredIn.numEvents
 					}}
 				/>
 			)}
