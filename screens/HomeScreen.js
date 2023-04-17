@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, ToastAndroid, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import * as Network from 'expo-network';
 
 import ScreenTemplate from '../components/hoc/ScreenTemplate';
 import Button from '../components/ui/Button';
@@ -31,7 +32,16 @@ function HomeScreen({ navigation }) {
 		return null;
 	}
 
-	function fetchRandomCharacterHandler() {
+	async function fetchRandomCharacterHandler() {
+		// Abort request if device isn't connected to network
+		const status = await Network.getNetworkStateAsync();
+		if (!status.isConnected || !status.isInternetReachable) {
+			return ToastAndroid.show(
+				'No network connection detected...',
+				ToastAndroid.LONG
+			);
+		}
+
 		navigation.navigate('Character', { randomCharacter: true });
 	}
 
@@ -44,11 +54,21 @@ function HomeScreen({ navigation }) {
 		}
 	}
 
-	function searchCharacters() {
+	async function searchCharactersHandler() {
 		if (!enteredText) {
 			setIsValidInput(false);
 			return;
 		}
+
+		// Abort request if device isn't connected to network
+		const status = await Network.getNetworkStateAsync();
+		if (!status.isConnected || !status.isInternetReachable) {
+			return ToastAndroid.show(
+				'No network connection detected...',
+				ToastAndroid.LONG
+			);
+		}
+
 		navigation.navigate('List', { searchParam: enteredText });
 	}
 
@@ -86,7 +106,7 @@ function HomeScreen({ navigation }) {
 						)}
 
 						<Button
-							onPress={searchCharacters}
+							onPress={searchCharactersHandler}
 							rippleColor={Colors.primary300}
 							disabled={!isValidInput}
 							containerStyle={{ width: 200, marginVertical: 6 }}
